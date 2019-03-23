@@ -46,10 +46,10 @@ public class MySerialHelper extends SerialHelper {
   ### 发送（MainActivity.kt）
   ```
    private fun send(ba: ByteArray){
-        OkSerialPort.instance.start {
+        OkSerialPort.instance.start(ba){
             Log.e(TAG,"【----------start------------】")
             setRecord(ba,true)
-        }.send(ba).receive {
+        }.receive {
             res->
             setRecord(res,false)
         }.onError {
