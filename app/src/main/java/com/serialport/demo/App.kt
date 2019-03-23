@@ -14,6 +14,11 @@ class App : Application() {
 
   override fun onCreate(){
       super.onCreate()
+      initOkSerialPort()
   }
+
+    private fun initOkSerialPort(){
+        OkSerialPort.instance.init(MySerialHelper())
+    }
 
 }

@@ -14,7 +14,6 @@ import java.util.concurrent.TimeoutException
 
 class MainActivity : BaseActivity() {
     private val TAG="MainActivity"
-    private val serialHelper: SerialHelper = MySerialHelper()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -45,7 +44,6 @@ class MainActivity : BaseActivity() {
 
     override fun bindData(savedInstanceState: Bundle?) {
         super.bindData(savedInstanceState)
-        OkSerialPort.instance.init(serialHelper)
         open()
         val i=Integer.parseInt("A", 16)
         Log.e(TAG,""+i)
