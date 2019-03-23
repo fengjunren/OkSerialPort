@@ -50,10 +50,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun send(ba: ByteArray){
-        OkSerialPort.instance.start {
+        OkSerialPort.instance.start(ba){
             Log.e(TAG,"【----------start------------】")
             setRecord(ba,true)
-        }.send(ba).receive {
+        }.receive {
             res->
             setRecord(res,false)
         }.onError {

@@ -52,7 +52,7 @@ class OkSerialPort private constructor() {
         })
     }
 
-    fun ok(param: Param){
+    private fun ok(param: Param){
         var canExec=true
         if(!serialHelper.isOpen){
             Log.i(TAG, "【串口还没打开，请先打开】" )
@@ -113,11 +113,15 @@ class OkSerialPort private constructor() {
     }
 
 
-    fun start(callback:(()->Unit)):Param{
+    fun start(cmd: ByteArray,callback:(()->Unit)):Param{
         val param=Param()
         param.startCallBack=callback
         param.okSerialPort=this
+        param.command=cmd
         return param
+    }
+    fun start(cmd: ByteArray):Param{
+        return start(cmd){}
     }
 
     class Param{
@@ -128,10 +132,10 @@ class OkSerialPort private constructor() {
           var command: ByteArray? =null
           var okSerialPort: OkSerialPort? =null
 
-        fun send(cmd: ByteArray):Param{
-            command=cmd
-            return this
-        }
+//        fun send(cmd: ByteArray):Param{
+//            command=cmd
+//            return this
+//        }
 
         fun receive(callback:((ByteArray)->Unit)):Param{
             recvCallBack=callback
