@@ -75,3 +75,8 @@ public class MySerialHelper extends SerialHelper {
   
    ### 安装[串口调试助手](https://raw.githubusercontent.com/fengjunren/SerialPortDemo/master/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/serial_port_utility_20160916.exe)
   ![预览](/img/assistant.png)
+  
+   ### VirtualBox串口配置
+  ![预览](/img/vbox-serialport.png)
+  
+  打开genymotion,直接跑代码
