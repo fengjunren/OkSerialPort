@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeoutException
 
 
@@ -44,14 +45,14 @@ class MainActivity : BaseActivity() {
 
     override fun bindData(savedInstanceState: Bundle?) {
         super.bindData(savedInstanceState)
-        OKSerialPort.instance.init(serialHelper)
+        OkSerialPort.instance.init(serialHelper)
         open()
         val i=Integer.parseInt("A", 16)
         Log.e(TAG,""+i)
     }
 
     private fun send(ba: ByteArray){
-        OKSerialPort.instance.start {
+        OkSerialPort.instance.start {
             Log.e(TAG,"【----------start------------】")
             setRecord(ba,true)
         }.send(ba).receive {
@@ -62,6 +63,7 @@ class MainActivity : BaseActivity() {
             run {
                 when (e) {
                     is IOException -> toast("通信超时")
+                    is ExecutionException -> toast("通信超时")
                     is TimeoutException -> toast("响应超时")
                     is InterruptedException -> toast("通信中断")
                 }
@@ -73,7 +75,7 @@ class MainActivity : BaseActivity() {
 
 
     private fun open(){
-        OKSerialPort.instance.open({
+        OkSerialPort.instance.open({
             setStatus("已连接")
         },{e->
             Log.i(TAG,"串口启动失败..."+"\n"+getStackInfo(e))
@@ -82,7 +84,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun close(){
-        OKSerialPort.instance.close({
+        OkSerialPort.instance.close({
             setStatus("未连接")
         },{e->
             Log.i(TAG,"串口关闭异常..."+"\n"+getStackInfo(e))

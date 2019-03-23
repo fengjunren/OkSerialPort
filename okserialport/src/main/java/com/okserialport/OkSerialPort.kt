@@ -8,15 +8,15 @@ import java.io.IOException
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeoutException
 
-class OKSerialPort private constructor() {
+class OkSerialPort private constructor() {
     lateinit var serialHelper: SerialHelper
     private  var mHandler: Handler= Handler(Looper.getMainLooper())
 
-    private val TAG = "OKSerialPort"
+    private val TAG = "OkSerialPort"
 
     private object Holder {
-        val INSTANCE = OKSerialPort()
-        val INSTANCE2 = OKSerialPort() // 支持多个串口
+        val INSTANCE = OkSerialPort()
+        val INSTANCE2 = OkSerialPort() // 支持多个串口
     }
 
     companion object {
@@ -126,7 +126,7 @@ class OKSerialPort private constructor() {
           var startCallBack: (() -> Unit)? =null
           var completeCallBack: (() -> Unit)? =null
           var command: ByteArray? =null
-          var okSerialPort: OKSerialPort? =null
+          var okSerialPort: OkSerialPort? =null
 
         fun send(cmd: ByteArray):Param{
             command=cmd
