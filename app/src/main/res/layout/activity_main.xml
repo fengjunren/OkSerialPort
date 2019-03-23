@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+     android:orientation="vertical">
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/colorPrimary">
+            <TextView android:layout_width="200dp" android:layout_height="match_parent" android:layout_alignParentLeft="true" android:text="状态：未连接" android:gravity="center_vertical" android:id="@+id/tvStatus"/>
+
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_alignParentRight="true">
+                <Button android:layout_width="70dp" android:layout_height="match_parent" android:text="连接" android:id="@+id/btnOpen"/>
+                <Button android:layout_width="70dp" android:layout_height="match_parent" android:text="断开" android:id="@+id/btnClose"/>
+                <Button android:layout_width="70dp" android:layout_height="wrap_content" android:text="清空" android:id="@+id/btnClean"  />
+            </LinearLayout>
+
+        </RelativeLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:text="" android:id="@+id/tvRecord"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="50dp" android:orientation="horizontal">
+            <EditText android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+                      android:id="@+id/etCmd" android:hint="请输入要发送的指令" android:text="03040C0001"/>
+            <Button android:layout_width="70dp" android:layout_height="match_parent" android:text="发送" android:id="@+id/btnSend"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
