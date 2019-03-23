@@ -107,13 +107,13 @@ public abstract class SerialHelper {
         int len=result.length;
         int availLen=mInputStream.available();
         if(availLen>=len){
-             mInputStream.readFully(result);
+             mInputStream.read(result);
         }else {
             boolean loop = true;
             while (loop&&!isTimeOut()){
                 availLen=mInputStream.available();
                 if(availLen>=len){
-                    mInputStream.readFully(result);
+                    mInputStream.read(result);
                     loop=false;
                 }
                 if(loop)Thread.sleep(getSleepTime());
