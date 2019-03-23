@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeoutException
 
 class OkSerialPort private constructor() {
-    lateinit var serialHelper: SerialHelper
+    private lateinit var serialHelper: SerialHelper
     private  var mHandler: Handler= Handler(Looper.getMainLooper())
 
     private val TAG = "OkSerialPort"
