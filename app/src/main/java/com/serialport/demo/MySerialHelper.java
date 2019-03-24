@@ -51,9 +51,11 @@ public class MySerialHelper extends SerialHelper {
         int len=temp[0];// 获取数据的长度
         Log.i(TAG,"【响应数据长度】："+ len);
         baos.write(temp);
-        byte [] data=new byte[len];
-        readWithNoBlock(data);
-        baos.write(data);
+        if(len>0&&!isTimeOut()){
+            byte [] data=new byte[len];
+            readWithNoBlock(data);
+            baos.write(data);
+        }
         return baos.toByteArray();
     }
 }
