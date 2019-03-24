@@ -3,7 +3,6 @@ package com.serialport.demo
 import android.os.Bundle
 import android.util.Log
 import com.okserialport.ByteUtil
-import com.okserialport.SerialHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 import java.text.SimpleDateFormat

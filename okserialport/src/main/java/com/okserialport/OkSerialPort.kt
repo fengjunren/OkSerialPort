@@ -113,15 +113,12 @@ class OkSerialPort private constructor() {
     }
 
 
-    fun start(cmd: ByteArray,callback:(()->Unit)):Param{
+    fun start(cmd: ByteArray, callback: (() -> Unit)? =null):Param{
         val param=Param()
         param.startCallBack=callback
         param.okSerialPort=this
         param.command=cmd
         return param
-    }
-    fun start(cmd: ByteArray):Param{
-        return start(cmd){}
     }
 
     class Param{
