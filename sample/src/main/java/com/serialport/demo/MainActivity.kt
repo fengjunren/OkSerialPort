@@ -52,9 +52,12 @@ class MainActivity : BaseActivity() {
         OkSerialPort.instance.start(ba){
             Log.e(TAG,"【----------start------------】")
             setRecord(ba,true)
-        }.receive {
+        }.receive{
             res->
+            run {
+            Log.e(TAG,"【----------received thread------------】"+Thread.currentThread().name)
             setRecord(res,false)
+        }
         }.onError {
             e->
             run {
@@ -65,8 +68,9 @@ class MainActivity : BaseActivity() {
                     is InterruptedException -> toast("通信中断")
                 }
             }
-        }.onComplete {
+        }.onComplete{
             Log.e(TAG,"【----------onComplete------------】")
+            Log.e(TAG,"【----------onComplete thread------------】"+Thread.currentThread().name)
         }.ok()
     }
 
@@ -102,14 +106,12 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setRecord(txt:String, isSend:Boolean){
-        runOnUiThread {
             var direction="接收："
             if(isSend){
                 direction="发送："
             }
             val s=tvRecord.text.toString()+"\n"+direction+" "+txt+"            "+SimpleDateFormat("HH:mm:ss").format(Date())
             tvRecord.text=s
-        }
     }
     override fun onDestroy() {
         super.onDestroy()

@@ -71,13 +71,14 @@ class OkSerialPort private constructor() {
                         this.invoke()
                     }
                 }
-
                 val result=serialHelper.senAndRev(param.command)
-                param.recvCallBack?.run {
-                    mHandler.post{
-                        this.invoke(result)
-                    }
-                }
+                 if(param.isRecvedOnMainThread){
+                     mHandler.post{
+                         param.recvCallBack?.invoke(result)
+                     }
+                 }else{
+                     param.recvCallBack?.invoke(result)
+                 }
             }catch (e: IOException){
                 param.errorCallBack?.run {
                     mHandler.post{
@@ -103,11 +104,13 @@ class OkSerialPort private constructor() {
                     }
                 }
             }finally {
-                param.completeCallBack?.run {
-                    mHandler.post{
-                        this.invoke()
-                    }
-               }
+                 if(param.isCompletedOnMainThread){
+                     mHandler.post{
+                         param.completeCallBack?.invoke()
+                     }
+                 }else{
+                     param.completeCallBack?.invoke()
+                 }
             }
         })
     }
@@ -128,13 +131,16 @@ class OkSerialPort private constructor() {
           var completeCallBack: (() -> Unit)? =null
           var command: ByteArray? =null
           var okSerialPort: OkSerialPort? =null
+        var isRecvedOnMainThread: Boolean=true
+        var isCompletedOnMainThread: Boolean=true
 
 //        fun send(cmd: ByteArray):Param{
 //            command=cmd
 //            return this
 //        }
 
-        fun receive(callback:((ByteArray)->Unit)):Param{
+        fun receive(isOnMainThread:Boolean=true,callback:((ByteArray)->Unit)):Param{
+            isRecvedOnMainThread=isOnMainThread
             recvCallBack=callback
             return this
         }
@@ -145,7 +151,8 @@ class OkSerialPort private constructor() {
         }
 
 
-        fun onComplete(callback:(()->Unit)):Param{
+        fun onComplete(isOnMainThread:Boolean=true,callback:(()->Unit)):Param{
+            isCompletedOnMainThread=isOnMainThread
             completeCallBack=callback
             return this
         }

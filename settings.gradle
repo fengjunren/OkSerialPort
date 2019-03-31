@@ -1,1 +1,1 @@
-include ':app', ':okserialport'
+include ':sample', ':okserialport'
