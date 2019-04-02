@@ -79,30 +79,12 @@ class OkSerialPort private constructor() {
                  }else{
                      param.recvCallBack?.invoke(result)
                  }
-            }catch (e: IOException){
-                param.errorCallBack?.run {
-                    mHandler.post{
-                        this.invoke(e)
-                    }
-                }
-            }catch (e: ExecutionException){
+            }catch (e: Exception) {
                  param.errorCallBack?.run {
                      mHandler.post{
                          this.invoke(e)
                      }
                  }
-             }catch (e: TimeoutException){
-                param.errorCallBack?.run {
-                    mHandler.post{
-                        this.invoke(e)
-                    }
-                }
-            }catch (e:InterruptedException){
-                param.errorCallBack?.run {
-                    mHandler.post{
-                        this.invoke(e)
-                    }
-                }
             }finally {
                  if(param.isCompletedOnMainThread){
                      mHandler.post{
